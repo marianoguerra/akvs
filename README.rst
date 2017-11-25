@@ -307,4 +307,97 @@ it and exit by running the `q().` function in the shell:
 	(akvs@ganesha)1> q().
 	ok
 
+Coding (and testing) the Key Value store modules
+------------------------------------------------
+
+The way I usually code in erlang is to first build a stateless module that has
+an init function that returns some state, all other functions expect that state
+as first parameter, then those functions do something and return the state and
+the result.
+
+This modules are really easy to use in the shell and test.
+
+This will be our first module, we will call it akvs_kv and it will have the
+following API::
+
+.. code:: erl
+
+    %% types:
+
+    -type error() :: {error, {atom(), iolist(), map()}}.
+    -type key()   :: binary().
+    -type value() :: any().
+
+    % we don't want other modules to know/care about the internal structure of
+    % the state type
+    -opaque state() :: map().
+
+    %% functions:
+
+    %% @doc create a new instance of a key value store
+    -spec new(map()) -> {ok, state()} | error().
+
+    %% @doc dispose resources associated with a previously created kv store
+    -spec dispose(state()) -> ok | error().
+
+    %% @doc set a value for a key in a kv store
+    -spec set(state(), key(), value()) -> {ok, state()} | error().
+
+    %% @doc get a value for a key or an error if not found
+    -spec get(state(), key()) -> {ok, value()} | error().
+
+    %% @doc get a value for a key or a default value if not found
+    -spec get(state(), key(), value()) -> {ok, value()} | error().
+
+    %% @doc remove a value for a key, if not found do nothing
+    -spec del(state(), key()) -> {ok, state()} | error().
+
+Notice that to specify the API I used a specification of the types and functions,
+this is called spec, read more about it at the `Types and Function Specifications sectio in the erlang reference manual <http://erlang.org/doc/reference_manual/typespec.html>`_.
+
+Also for documentation comments I'm using the edoc format, read more about it at the `edoc user's guide section <http://erlang.org/doc/apps/edoc/chapter.html>`.
+
+You can see the full code of this module TODO:HERE.
+
+But how do we know if it works?
+
+At this point there are two ways: testing it in the shell, or writing tests for
+it, let's do the right thing and write some tests.
+
+We are going to use `Common Test <http://erlang.org/doc/apps/common_test/introduction.html>`_ for our tests.
+
+First we need to create the test folder for our tests:
+
+.. code:: sh
+
+    mkdir apps/akvs/test
+
+Inside it we will create a module called akvs_kv_SUITE that will contain the
+tests for the akvs_kv module.
+
+You can see the full code of this module TODO:HERE.
+
+To run the tests::
+
+.. code:: sh
+
+    rebar3 ct
+
+We can also use the type specs we defined to check our code using `dialyzer <http://erlang.org/doc/apps/dialyzer/dialyzer_chapter.html>`_:
+
+.. code:: sh
+
+    rebar3 dialyzer
+
+Everything seems to be right, let's move on to the next step.
+
+But before that, in case you want to generate API docs for our code taking advantage
+of the edoc annotations, you can do so by running:
+
+.. code:: sh
+
+    rebar3 edoc
+
+and opening apps/akvs/doc/index.html with a browser.
+
 
