@@ -12,7 +12,8 @@ For this we will use `kerl <https://github.com/kerl/kerl>`_, from it's github RE
 
     Easy building and installing of Erlang/OTP instances.
 
-    Kerl aims to be shell agnostic and its only dependencies, excluding what's required to actually build Erlang/OTP, are curl and git.
+	Kerl aims to be shell agnostic and its only dependencies, excluding what's
+	required to actually build Erlang/OTP, are curl and git.
 
 so, first we need to fetch kerl:
 
@@ -94,7 +95,14 @@ First we fetch an updated list of releases:
 The output in my case::
 
     The available releases are:
-    R10B-0 R10B-10 R10B-1a R10B-2 R10B-3 R10B-4 R10B-5 R10B-6 R10B-7 R10B-8 R10B-9 R11B-0 R11B-1 R11B-2 R11B-3 R11B-4 R11B-5 R12B-0 R12B-1 R12B-2 R12B-3 R12B-4 R12B-5 R13A R13B01 R13B02-1 R13B02 R13B03 R13B04 R13B R14A R14B01 R14B02 R14B03 R14B04 R14B_erts-5.8.1.1 R14B R15B01 R15B02 R15B02_with_MSVCR100_installer_fix R15B03-1 R15B03 R15B R16A_RELEASE_CANDIDATE R16B01 R16B02 R16B03-1 R16B03 R16B 17.0-rc1 17.0-rc2 17.0 17.1 17.3 17.4 17.5 18.0 18.1 18.2.1 18.2 18.3 19.0 19.1 19.2 19.3 20.0 20.1
+	R10B-0 R10B-10 R10B-1a R10B-2 R10B-3 R10B-4 R10B-5 R10B-6 R10B-7 R10B-8
+	R10B-9 R11B-0 R11B-1 R11B-2 R11B-3 R11B-4 R11B-5 R12B-0 R12B-1 R12B-2 R12B-3
+	R12B-4 R12B-5 R13A R13B01 R13B02-1 R13B02 R13B03 R13B04 R13B R14A R14B01
+	R14B02 R14B03 R14B04 R14B_erts-5.8.1.1 R14B R15B01 R15B02
+	R15B02_with_MSVCR100_installer_fix R15B03-1 R15B03 R15B
+	R16A_RELEASE_CANDIDATE R16B01 R16B02 R16B03-1 R16B03 R16B 17.0-rc1 17.0-rc2
+	17.0 17.1 17.3 17.4 17.5 18.0 18.1 18.2.1 18.2 18.3 19.0 19.1 19.2 19.3
+	20.0 20.1
 
 Let's build the 20.1 version:
 
