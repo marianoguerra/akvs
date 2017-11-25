@@ -136,6 +136,17 @@ Now we have erlang, we need a build tool, we are going to use `rebar3 <https://s
     # set execution permissions for our user
     chmod u+x rebar3
 
+Just in case you have problems running the rebar3 commands with a different
+version, here's the version I'm using::
+
+.. code:: sh
+
+	rebar3 version
+
+Output::
+
+	rebar 3.4.7 on Erlang/OTP 20 Erts 9.1
+
 Setting up our project
 ----------------------
 
