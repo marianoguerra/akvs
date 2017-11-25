@@ -355,7 +355,7 @@ following API:
 Notice that to specify the API I used a specification of the types and functions,
 this is called spec, read more about it at the `Types and Function Specifications sectio in the erlang reference manual <http://erlang.org/doc/reference_manual/typespec.html>`_.
 
-Also for documentation comments I'm using the edoc format, read more about it at the `edoc user's guide section <http://erlang.org/doc/apps/edoc/chapter.html>`.
+Also for documentation comments I'm using the edoc format, read more about it at the `edoc user's guide section <http://erlang.org/doc/apps/edoc/chapter.html>`_.
 
 You can see the full code of this module here: `akvs_kv <https://github.com/marianoguerra/akvs/blob/77188c096275aa1df9b519e55a08fd57fcfeedc3/apps/akvs/src/akvs_kv.erl>`_
 
