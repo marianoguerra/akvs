@@ -318,7 +318,7 @@ the result.
 This modules are really easy to use in the shell and test.
 
 This will be our first module, we will call it akvs_kv and it will have the
-following API::
+following API:
 
 .. code:: erl
 
@@ -357,7 +357,7 @@ this is called spec, read more about it at the `Types and Function Specification
 
 Also for documentation comments I'm using the edoc format, read more about it at the `edoc user's guide section <http://erlang.org/doc/apps/edoc/chapter.html>`.
 
-You can see the full code of this module TODO:HERE.
+You can see the full code of this module here: `akvs_kv <https://github.com/marianoguerra/akvs/blob/77188c096275aa1df9b519e55a08fd57fcfeedc3/apps/akvs/src/akvs_kv.erl>`_
 
 But how do we know if it works?
 
@@ -375,9 +375,9 @@ First we need to create the test folder for our tests:
 Inside it we will create a module called akvs_kv_SUITE that will contain the
 tests for the akvs_kv module.
 
-You can see the full code of this module TODO:HERE.
+You can see the full code of this module here: `akvs_kv_SUITE <https://github.com/marianoguerra/akvs/blob/77188c096275aa1df9b519e55a08fd57fcfeedc3/apps/akvs/test/akvs_kv_SUITE.erl>`_
 
-To run the tests::
+To run the tests:
 
 .. code:: sh
 
