@@ -5,6 +5,7 @@
   {mod, { akvs_app, []}},
   {applications,
    [kernel,
+    cowboy,
     stdlib
    ]},
   {env,[]},

@@ -471,3 +471,126 @@ since the API doesn't know a thing about the way we register/lookup namespaces
 we can explore different alternatives later.
 
 You can view the source code for akvs module here: `akvs <http://akvs>`_ and the tests here `akvs_SUITE <http://akvs_SUITE>`_.
+
+An HTTP API for our key value stores
+------------------------------------
+
+We are at the point where we can expose our APIs to the world, we are going to
+do it by exposing a really basic HTTP API for it.
+
+The API will look like this:
+
+.. code:: http
+
+    # set key in namespace to the binary value sent in body
+    # return status: 201
+    POST /kv/<namespace>/<key>
+    <body>
+
+    # get key in namespace
+    # return status:
+    #  200: if found
+    #  404: if not found
+    GET /kv/<namespace>/<key>
+
+    # delete key from namespace
+    # return status: 200
+    DELETE /kv/<namespace>/<key>
+
+To create an HTTP API we need an HTTP server, in this case we will use `Cowboy 2 <https://ninenines.eu/docs/en/cowboy/2.1/guide/>`_.
+
+First we need to add it as a dependency in our rebar.config file in the deps
+section and in the release dependencies section.
+
+Then we need to setup the routes in our application initialization code.
+
+We are going to have only one route and handler, we are going to use a basic
+HTTP to keep it simple, you can read the handler's code here: `akvs_h_kv <http://todo>`_.
+
+Now we can test it by building a release, starting it and playing with the API using curl:
+
+.. code:: sh
+
+    rebar3 release
+    _build/default/rel/akvs/bin/akvs console
+
+In another shell:
+
+.. code:: sh
+
+    curl http://localhost:8080/kv/foo/bar
+    Not Found
+
+    curl -X POST http://localhost:8080/kv/foo/bar -d "hello world"
+    Created
+
+    curl http://localhost:8080/kv/foo/bar
+    hello world
+
+    curl -X DELETE http://localhost:8080/kv/foo/bar
+    OK
+
+    curl http://localhost:8080/kv/foo/bar
+    Not Found
+
+    curl -X PUT http://localhost:8080/kv/foo/bar -d "hello world"
+    Method Not Allowed
+
+Seems to work fine.
+
+Now we can build a production release and try it:
+
+.. code:: sh
+
+    rebar3 as prod release
+    cd _build/prod/rel
+    tar -czf akvs.tar.gz akvs
+    cd -
+    mv _build/prod/rel/akvs.tar.gz /tmp
+    cd /tmp
+    tar -xzf akvs.tar.gz
+    cd akvs
+    ./bin/akvs start
+
+The application is started, you can check it's running by pinging it:
+
+.. code:: sh
+
+    ./bin/akvs ping
+
+In case you need, you can attach to it (you should exit with Ctrl+D, using q()
+won't only detach your console but also stop the system!):
+
+.. code:: sh
+
+    ./bin/akvs attach
+
+You can try it again:
+
+.. code:: sh
+
+    curl http://localhost:8080/kv/foo/bar
+    curl -X POST http://localhost:8080/kv/foo/bar -d "hello world"
+    curl http://localhost:8080/kv/foo/bar
+    curl -X DELETE http://localhost:8080/kv/foo/bar
+    curl http://localhost:8080/kv/foo/bar
+    curl -X PUT http://localhost:8080/kv/foo/bar -d "hello world"
+
+When you are finished, you can stop it:
+
+.. code:: sh
+
+    ./bin/akvs stop
+
+Now you can upload akvs.tar.gz to any bare server and start akvs there, as long
+as the operating system is similar (better if the same) as the one where you
+built the release, this is because when building the release we bundle the
+erlang runtime for simplicity, this assumes specific versions of libraries like
+libssl which may not be available on the target system if it's too different.
+
+Another way is to build the release without bundling the erlang runtime and
+having it available on the target system, just make sure that the erlang
+runtime in the target system has the same version you used to build it,
+otherwise you may experience errors due to modules/functions not being
+available or bytecode incompatibility if the target runtime is older than the
+one used for the release.
