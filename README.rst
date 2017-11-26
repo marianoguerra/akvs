@@ -470,7 +470,7 @@ This solution is not recommendable at all but it will allow us to continue and
 since the API doesn't know a thing about the way we register/lookup namespaces
 we can explore different alternatives later.
 
-You can view the source code for akvs module here: `akvs <http://akvs>`_ and the tests here `akvs_SUITE <http://akvs_SUITE>`_.
+You can view the source code for akvs module here: `akvs <https://github.com/marianoguerra/akvs/blob/c6a8c4ae5d28610f153d13515994f4456209c232/apps/akvs/src/akvs.erl>`_ and the tests here `akvs_SUITE <https://github.com/marianoguerra/akvs/blob/c6a8c4ae5d28610f153d13515994f4456209c232/apps/akvs/test/akvs_SUITE.erl>`_.
 
 An HTTP API for our key value stores
 ------------------------------------
@@ -499,13 +499,13 @@ The API will look like this:
 
 To create an HTTP API we need an HTTP server, in this case we will use `Cowboy 2 <https://ninenines.eu/docs/en/cowboy/2.1/guide/>`_.
 
-First we need to add it as a dependency in our rebar.config file in the deps
-section and in the release dependencies section.
+First we need to `add it as a dependency in our rebar.config file in the deps
+section and in the release dependencies section <https://github.com/marianoguerra/akvs/commit/c6a8c4ae5d28610f153d13515994f4456209c232#diff-31d7a50c99c265ca2793c20961b60979L1>`_.
 
-Then we need to setup the routes in our application initialization code.
+Then we need to `setup the routes in our application initialization code <https://github.com/marianoguerra/akvs/blob/c6a8c4ae5d28610f153d13515994f4456209c232/apps/akvs/src/akvs_app.erl#L30>`_.
 
 We are going to have only one route and handler, we are going to use a basic
-HTTP to keep it simple, you can read the handler's code here: `akvs_h_kv <http://todo>`_.
+HTTP to keep it simple, you can read the handler's code here: `akvs_h_kv <https://github.com/marianoguerra/akvs/blob/c6a8c4ae5d28610f153d13515994f4456209c232/apps/akvs/src/akvs_h_kv.erl>`_.
 
 Now we can test it by building a release, starting it and playing with the API using curl:
 
