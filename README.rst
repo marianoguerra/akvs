@@ -428,3 +428,46 @@ Run the tests:
 .. code:: sh
 
     rebar3 ct
+
+An API for our key value stores
+-------------------------------
+
+Now we can spawn a key value store in a gen_server and apply operations to it,
+but like with the stateless module, someone has to keep a reference to the
+process and provide a nicer way to find and operate on our key value stores, if
+it was only one it's easy to just start it as a registered process with a name
+and send messages to it by it's name, but in our case, we want to provide
+namespaces where each namespace holds a key value store of its own.
+
+The abstract API or this module should be like this:
+
+.. code:: erl
+
+    -type ns() :: binary().
+    -type key() :: akvs_kv:key().
+    -type value() :: akvs_kv:value().
+    -type error() :: akvs_kv:value().
+
+    %% @doc set Key to Value in namespace Ns
+    -spec set(ns(), key(), value()) -> ok | error().
+
+    %% @doc get Key from namespace Ns
+    -spec get(ns(), key()) -> {ok, value()} | error().
+
+    %% @doc get Key from namespace Ns or DefaultValue if Key not found
+    -spec get(ns(), key(), value()) -> {ok, value()} | error().
+
+    %% @doc delete  Key in namespace Ns
+    -spec del(ns(), key()) -> ok | error().
+
+Right now we are going to solve the problem of who keeps the namespace to
+process mapping really simple so we can continue, we are going to setup a
+public ETS table at application startup and lookup the processes by namespace
+there, if not found we are going to start the process and register it under
+that namespace.
+
+This solution is not recommendable at all but it will allow us to continue and
+since the API doesn't know a thing about the way we register/lookup namespaces
+we can explore different alternatives later.
+
+You can view the source code for akvs module here: `akvs <http://akvs>`_ and the tests here `akvs_SUITE <http://akvs_SUITE>`_.

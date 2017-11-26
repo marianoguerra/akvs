@@ -3,7 +3,7 @@
 %% this module implements the gen_server behaviour
 -behaviour(gen_server).
 
--export([start_link/1, stop/1]).
+-export([start_link/1, start/1, stop/1]).
 
 %% API
 -export([set/3, get/2, get/3, del/2]).
@@ -15,6 +15,9 @@
          handle_info/2,
          terminate/2,
          code_change/3]).
+
+start(Opts) ->
+    gen_server:start(?MODULE, Opts, []).
 
 start_link(Opts) ->
     gen_server:start_link(?MODULE, Opts, []).
