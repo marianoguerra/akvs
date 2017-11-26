@@ -419,9 +419,9 @@ The module will be called akvs_kv_s (_s for server, don't know if there's a
 convention for it).
 
 The module is a basic gen_server that exposes a couple functions to call
-the kv API from the akvs_kv module, you can read the code here: `akvs_kv_s <http://TODO>`_.
+the kv API from the akvs_kv module, you can read the code here: `akvs_kv_s <https://github.com/marianoguerra/akvs/blob/82b10a423b587a52c890a56cbfc90d24ebe5e6f0/apps/akvs/src/akvs_kv_s.erl>`_.
 
-We write tests for this module too, you can read the test's code here: `akvs_kv_s_SUITE <http://TODO>`_.
+We write tests for this module too, you can read the test's code here: `akvs_kv_s_SUITE <https://github.com/marianoguerra/akvs/blob/82b10a423b587a52c890a56cbfc90d24ebe5e6f0/apps/akvs/test/akvs_kv_s_SUITE.erl>`_.
 
 Run the tests:
 

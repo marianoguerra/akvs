@@ -35,7 +35,7 @@ stop(Ref) ->
   gen_server:call(Ref, stop).
 
 init(Opts) ->
-	{ok, KvState} = akvs_kv:new(Opts),
+    {ok, KvState} = akvs_kv:new(Opts),
     State = #{kv => KvState} ,
     {ok, State}.
 
@@ -58,7 +58,7 @@ handle_call({get, Key, DefaultValue}, _From, State=#{kv := Kv}) ->
     {reply, Res, State};
 
 handle_call(stop, _From, State=#{kv := Kv}) ->
-	ok = akvs_kv:dispose(Kv),
+    ok = akvs_kv:dispose(Kv),
     {stop, normal, stopped, maps:remove(kv, State)}.
 
 handle_cast(_Msg, State) ->
@@ -68,7 +68,7 @@ handle_info(_Info, State) ->
     {noreply, State}.
 
 terminate(_Reason, _State=#{kv := Kv}) ->
-	ok = akvs_kv:dispose(Kv);
+    ok = akvs_kv:dispose(Kv);
 terminate(_Reason, _State) ->
     ok.
 
