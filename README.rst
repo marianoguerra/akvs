@@ -12,10 +12,10 @@ For this we will use `kerl <https://github.com/kerl/kerl>`_, from it's github RE
 
     Easy building and installing of Erlang/OTP instances.
 
-	Kerl aims to be shell agnostic and its only dependencies, excluding what's
-	required to actually build Erlang/OTP, are curl and git.
+    Kerl aims to be shell agnostic and its only dependencies, excluding what's
+    required to actually build Erlang/OTP, are curl and git.
 
-so, first we need to fetch kerl:
+So, first we need to fetch kerl:
 
 .. code:: sh
 
@@ -31,7 +31,7 @@ so, first we need to fetch kerl:
     # set execution permitions for our user
     chmod u+x kerl
 
-you will need to add ~/bin to your PATH variable so your shell can find the
+You will need to add ~/bin to your PATH variable so your shell can find the
 kerl script, you can do it like this in your shell:
 
 .. code:: sh
@@ -49,7 +49,7 @@ it the rc file of your shell of choice, for bash it's ~/.bashrc, for zsh it's
 
     export PATH=$PATH:$HOME/bin
 
-after this, start a new shell or source your rc file so that it picks up your
+After this, start a new shell or source your rc file so that it picks up your
 new PATH variable, you can check that it's set correctly by running:
 
 .. code:: sh
@@ -137,7 +137,7 @@ Now we have erlang, we need a build tool, we are going to use `rebar3 <https://s
     chmod u+x rebar3
 
 Just in case you have problems running the rebar3 commands with a different
-version, here's the version I'm using::
+version, here's the version I'm using:
 
 .. code:: sh
 
@@ -176,18 +176,18 @@ First of all, we created a release, which is a kind of project that can have
 more than one application (a common way to structure a project is into applications
 and libraries)
 
-under the apps folder are all the applications we mantain for this release,
+Under the apps folder are all the applications we mantain for this release,
 in our case we only have one application, named akvc.
 
-under the akvs application folder we have a src folder where all the source code
+Under the akvs application folder we have a src folder where all the source code
 for that application will live, we can add other folders there, for tests, header files, private files etc.
 
 apps/akvs/src/akvs_app.erl
 
     The $APPNAME_app module is called when starting and stopping the app to do
-    the setup and tear down of the application
+    the setup and tear down of the application.
 
-    Check Erlang's `manual for application <http://erlang.org/doc/man/application.html>`_ or the `user's guide entry for application <http://erlang.org/doc/design_principles/applications.html>`_ for more information
+    Check Erlang's `manual for application <http://erlang.org/doc/man/application.html>`_ or the `user's guide entry for application <http://erlang.org/doc/design_principles/applications.html>`_ for more information.
 
 apps/akvs/src/akvs_sup.erl
 
@@ -195,26 +195,26 @@ apps/akvs/src/akvs_sup.erl
     implements the supervisor behavior and will be "hooked" into the supervisor
     hierarchy of this release when initialized.
 
-    Check Erlang's `manual for supervisor <http://erlang.org/doc/man/supervisor.html>`_ or the `user's guide entry for supervisor <http://erlang.org/doc/design_principles/sup_princ.html>`_ for more information
+    Check Erlang's `manual for supervisor <http://erlang.org/doc/man/supervisor.html>`_ or the `user's guide entry for supervisor <http://erlang.org/doc/design_principles/sup_princ.html>`_ for more information.
 
 apps/akvs/src/akvs.app.src
 
-    The $APPNANE.app.src is a file that contains metadata about this app
+    The $APPNANE.app.src is a file that contains metadata about this app.
 
-    Check ERlang's `manual for application resource file <http://erlang.org/doc/man/app.html>`_ for more information
+    Check ERlang's `manual for application resource file <http://erlang.org/doc/man/app.html>`_ for more information.
 
 rebar.config
 
     Contains information about the project, dependencies, how to build it,
     test it, and how to build a release.
-    
-    Check `rebar3 docs <http://www.rebar3.org/docs>`_ for details
+
+    Check `rebar3 docs <http://www.rebar3.org/docs>`_ for details.
 
 config/sys.config
 
     Configuration parameters for the application.
-    
-    Check `sys.config's manual page <http://erlang.org/doc/man/config.html>`_ for more information
+
+    Check `sys.config's manual page <http://erlang.org/doc/man/config.html>`_ for more information.
 
 config/vm.args
 
@@ -222,16 +222,16 @@ config/vm.args
 
 .gitignore
 
-    Git specific, files to ignore
+    Git specific, files to ignore.
 
 LICENSE
 
     The license for this project, you should change it if the Apache License 2.0
-    isn't the one you want
+    isn't the one you want.
 
 README.md
 
-    Project's readme
+    Project's readme.
 
 Starting it for the first time
 -------------------------------
@@ -398,7 +398,7 @@ of the edoc annotations, you can do so by running:
 
     rebar3 edoc
 
-and opening apps/akvs/doc/index.html with a browser.
+And opening apps/akvs/doc/index.html with a browser.
 
 Wrapping the state
 ------------------
