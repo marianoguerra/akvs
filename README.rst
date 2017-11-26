@@ -127,7 +127,7 @@ Now everytime we want to use this version of erlang we need to run:
 Setting up rebar3
 -----------------
 
-Now we have erlang, we need a build tool, we are going to use `rebar3 <https://s3.amazonaws.com/rebar3/rebar3>`_:
+Now we have erlang, we need a build tool, we are going to use `rebar3 <http://rebar3.org>`_:
 
 .. code:: sh
 
