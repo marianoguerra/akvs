@@ -400,4 +400,31 @@ of the edoc annotations, you can do so by running:
 
 and opening apps/akvs/doc/index.html with a browser.
 
+Wrapping the state
+------------------
 
+Stateless modules are a good start and are really easy to test and use, but we
+don't want to pass the burden of threading the state to the users of our code,
+also we want to centralize the state management so that more than one process
+can call our module and see the state changes of other callers.
+
+In this case we are using ETS to make it simpler but if our kv was backed by a
+map, or if we had some kind of cache, then state management would become really
+important to get right, otherwise the results seen by each caller would
+diverge.
+
+To manage the state of our module we are going to wrap it in a process, a `gen_server <http://erlang.org/doc/man/gen_server.html>`_ in this case.
+
+The module will be called akvs_kv_s (_s for server, don't know if there's a
+convention for it).
+
+The module is a basic gen_server that exposes a couple functions to call
+the kv API from the akvs_kv module, you can read the code here: `akvs_kv_s <http://TODO>`_.
+
+We write tests for this module too, you can read the test's code here: `akvs_kv_s_SUITE <http://TODO>`_.
+
+Run the tests:
+
+.. code:: sh
+
+    rebar3 ct
